@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Appesame.Views.AddItemView"
+             xmlns:vm="clr-namespace:Appesame.ViewModels"
+             xmlns:behaviors="clr-namespace:Behaviors;assembly=Behaviors">
+
+    <ContentPage.BindingContext>
+        <vm:AddItemViewModel/>
+    </ContentPage.BindingContext>
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding GoBackCommand}"
+                            TextOverride="back"
+                            IsEnabled="true"/>
+    </Shell.BackButtonBehavior>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="OK"
+                     Command="{Binding OkCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Placeholder="Insert Item Name"/>
+            <Button Text="Search"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

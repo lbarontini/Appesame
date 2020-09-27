@@ -20,7 +20,9 @@ namespace Appesame.ViewModels
         public List<ExamModel> ExamModelList{get; set;}
         public ICommand ItemTappedCommand { get; set; }
         public ICommand AddCommand { get; set; }
+        public Command<object> DeleteCommand { get; set; }
         public ICommand OnAppearingCommand { get; set; }
+
 
         public ExamViewModel()
         {
@@ -28,7 +30,9 @@ namespace Appesame.ViewModels
             OnAppearingCommand = new Command(GetExams);
             ItemTappedCommand = new Command<ExamModel>(async (x) => await  OnItemSelectedAsync(x));
             AddCommand = new Command(async () => await AddExam());
+            DeleteCommand = new Command<object>(DeleteExam);
         }
+
         private void GetExams(object obj)
         {
             ExamModelList = (List<ExamModel>)DataService.GetAllExams();
@@ -41,6 +45,12 @@ namespace Appesame.ViewModels
         private async Task AddExam() 
         {
             await Shell.Current.GoToAsync("//AddExam", true);
+        }
+        private void DeleteExam(object obj)
+        {
+            var exam = obj as ExamModel;
+            DataService.DeleteExam(exam);
+            ExamModelList = (List<ExamModel>)DataService.GetAllExams();
         }
     }
 }

@@ -14,13 +14,16 @@
                             TextOverride="back"
                             IsEnabled="true"/>
     </Shell.BackButtonBehavior>
-    
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="ok"
+                     Command="{Binding OkCommand}"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <StackLayout>
             <Entry Placeholder="Enter Exam Name" 
                    Text="{Binding ExamName, Mode=TwoWay}"/>
-            <Button Text="ok"
-                    Command="{Binding OkCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

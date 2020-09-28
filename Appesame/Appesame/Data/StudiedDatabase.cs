@@ -8,16 +8,17 @@ namespace Appesame.Data
 {
     class StudiedDatabase
     {
-        public List<ExamModel> ExamModelList { get; set; }
+        public ObservableCollection<ExamModel> ExamModelList { get; set; }
         public IList<ItemModel> FlashcardModelList { get; set; }
         public IList<ItemModel> RecordingModelList { get; set; }
         public StudiedDatabase()
         {
-            ExamModelList = new List<ExamModel>
+            ExamModelList = new ObservableCollection<ExamModel>
             {
                 new ExamModel("Chris"),
                 new ExamModel("Georgios")
             };
+
             FlashcardModelList = new List<ItemModel>
             {
                 new ItemModel("Chrisf"),

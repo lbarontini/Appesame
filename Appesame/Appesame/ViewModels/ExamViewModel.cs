@@ -12,30 +12,32 @@ using System;
 using Android.Util;
 using Xamarin.Essentials;
 using MvvmHelpers;
+using System.Collections.Specialized;
 
 namespace Appesame.ViewModels
 {
     public class ExamViewModel : BaseViewModel
     {
-        public List<ExamModel> ExamModelList{get; set;}
+        public ObservableCollection<ExamModel> _ExamModelList;
+        public ObservableCollection<ExamModel> ExamModelList
+        {
+            get { return _ExamModelList; }
+            set
+            {
+                SetProperty(ref _ExamModelList, value);
+                OnPropertyChanged("ExamModelList");
+            }
+        }
         public ICommand ItemTappedCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public Command<object> DeleteCommand { get; set; }
-        public ICommand OnAppearingCommand { get; set; }
-
-
         public ExamViewModel()
         {
-            ExamModelList = new List<ExamModel>();
-            OnAppearingCommand = new Command(GetExams);
+            ExamModelList = new ObservableCollection<ExamModel>();
+            ExamModelList = DataService.GetAllExams();
             ItemTappedCommand = new Command<ExamModel>(async (x) => await  OnItemSelectedAsync(x));
             AddCommand = new Command(async () => await AddExam());
             DeleteCommand = new Command<object>(DeleteExam);
-        }
-
-        private void GetExams(object obj)
-        {
-            ExamModelList = (List<ExamModel>)DataService.GetAllExams();
         }
         private async Task OnItemSelectedAsync(ExamModel examModel)
         {
@@ -50,7 +52,6 @@ namespace Appesame.ViewModels
         {
             var exam = obj as ExamModel;
             DataService.DeleteExam(exam);
-            ExamModelList = (List<ExamModel>)DataService.GetAllExams();
         }
     }
 }

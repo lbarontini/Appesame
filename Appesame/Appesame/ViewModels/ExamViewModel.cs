@@ -35,6 +35,7 @@ namespace Appesame.ViewModels
         {
             ExamModelList = new ObservableCollection<ExamModel>();
             ExamModelList = DataService.GetAllExams();
+
             ItemTappedCommand = new Command<ExamModel>(async (x) => await  OnItemSelectedAsync(x));
             AddCommand = new Command(async () => await AddExam());
             DeleteCommand = new Command<object>(DeleteExam);

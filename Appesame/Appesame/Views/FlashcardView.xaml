@@ -11,21 +11,30 @@
     </ContentPage.BindingContext>
 
     <Shell.BackButtonBehavior>
-        <BackButtonBehavior Command="{Binding GoBackCommand}"
-                            TextOverride="back"
-                            IsEnabled="true"/>
+        <BackButtonBehavior Command="{Binding GoBackCommand}"                        
+                            IsEnabled="true">
+            <BackButtonBehavior.IconOverride>
+                <FontImageSource Glyph="&#xf060;"
+                                 FontFamily="{StaticResource FontAwesomeSolid}"/>
+            </BackButtonBehavior.IconOverride>
+        </BackButtonBehavior>
     </Shell.BackButtonBehavior>
-    
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add"
-                     Command="{Binding AddCommand}"/>
+        <ToolbarItem Command="{Binding AddCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    FontFamily="{StaticResource FontAwesomeSolid}"
+                    Glyph="&#xf067;"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <ContentPage.Behaviors>
+    <!--<ContentPage.Behaviors>
         <behaviors:EventHandlerBehavior EventName="Appearing">
             <behaviors:InvokeCommandAction Command="{Binding OnAppearingCommand}"/>
         </behaviors:EventHandlerBehavior>
-    </ContentPage.Behaviors>
+    </ContentPage.Behaviors>-->
     
     <ContentPage.Content>
         <StackLayout>

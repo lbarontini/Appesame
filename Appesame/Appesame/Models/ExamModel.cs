@@ -1,17 +1,15 @@
 ﻿
+using Realms;
+using System;
+
 namespace Appesame.Models
 {
-    public class ExamModel
+    public class ExamModel : RealmObject
     {
-        public ExamModel(string name)
+        public ExamModel()
         {
-            Name = name;
         }
 
-        public string Name { get; set; }
-        public override string ToString()
-        {
-            return Name;
-        }
+        public string Name { get; set; } = Guid.NewGuid().ToString();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Appesame.Data;
 using Appesame.Models;
 using MvvmHelpers;
+using Realms;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -37,9 +38,10 @@ namespace Appesame.ViewModels
 
         private async Task AddExamToDatabase()
         {
-            ExamModel Exam = new ExamModel(ExamName);
+            ExamModel exam = new ExamModel();
+            exam.Name = ExamName;
             ExamName = "";
-            DataService.AddExam(Exam);
+            DataService.AddExam(exam);
             await Shell.Current.GoToAsync("//ExamChooser", true);
         }
     }

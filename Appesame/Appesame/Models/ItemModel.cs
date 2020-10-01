@@ -1,19 +1,23 @@
-﻿using System;
+﻿using Realms;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Appesame.Models
 {
-    public class ItemModel
+    public class ItemModel : RealmObject
     {
         public string Name { get; set; }
-        public ItemModel(string name)
-        {
-            Name = name;
-        }
-        public override string ToString()
-        {
-            return Name;
-        }
+        [PrimaryKey]
+        public string Uri { get; set; }
+        public bool IsMemorized { get; set; }
+
+        [Backlink(nameof(ExamModel.FlashcardList))]
+        public IQueryable<ExamModel> Flashcards { get; }
+
+        [Backlink(nameof(ExamModel.RecordingList))]
+        public IQueryable<ExamModel> Recordings { get; }
+        public ExamModel Exam { get; set; }
     }
 }

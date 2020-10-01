@@ -12,15 +12,13 @@ namespace Appesame.ViewModels
 {
     public class ExamViewModel : BaseViewModel
     {
-        public IEnumerable<ExamModel> ExamModelList { get; }
+        public IEnumerable<ExamModel> ExamModelList { get; } = DataService.GetAllExams();
 
         public ICommand ItemTappedCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public Command<object> DeleteCommand { get; set; }
         public ExamViewModel()
         {
-            ExamModelList = DataService.GetAllExams();
-
             ItemTappedCommand = new Command<ExamModel>(async (x) => await  OnItemSelectedAsync(x));
             AddCommand = new Command(async () => await AddExam());
             DeleteCommand = new Command<object>(DeleteExam);
@@ -36,7 +34,7 @@ namespace Appesame.ViewModels
         }
         private void DeleteExam(object obj)
         {
-            DataService.DeleteExam(obj as ExamModel);
+            DataService.DeleteExam(obj);
         }
     }
 }

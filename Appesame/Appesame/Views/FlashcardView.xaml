@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Appesame.ViewModels"
+             xmlns:bh="clr-namespace:Appesame.ViewModels.Behaviors" 
              xmlns:behaviors="clr-namespace:Behaviors;assembly=Behaviors"
              x:Class="Appesame.Views.FlashcardView"             
              Title="{Binding ExamName}">
@@ -30,17 +31,49 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <!--<ContentPage.Behaviors>
+    <ContentPage.Behaviors>
         <behaviors:EventHandlerBehavior EventName="Appearing">
             <behaviors:InvokeCommandAction Command="{Binding OnAppearingCommand}"/>
         </behaviors:EventHandlerBehavior>
-    </ContentPage.Behaviors>-->
-    
+    </ContentPage.Behaviors>
+
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="FlashcardView!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <ListView ItemsSource="{Binding FlashcardModelList}"
+                      x:Name="listView">
+                <ListView.Behaviors>
+                    <bh:ItemTappedBehavior Command="{Binding ItemTappedCommand}"/>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="1"
+                                    Text="{Binding Name}"
+                                    FontAttributes="Bold" />
+                                <ImageButton Grid.Column="2"
+                                            HeightRequest="60" WidthRequest="140" IsVisible="True"
+                                            Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference listView}}" 
+                                            CommandParameter="{Binding .}">
+                                    <ImageButton.Source>
+                                        <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
+                                                         Glyph="&#xf1f8;"
+                                                         Size="Small"/>
+                                    </ImageButton.Source>
+                                </ImageButton>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

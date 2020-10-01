@@ -30,6 +30,12 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
+    <ContentPage.Behaviors>
+        <behaviors:EventHandlerBehavior EventName="Appearing">
+            <behaviors:InvokeCommandAction Command="{Binding OnAppearingCommand}"/>
+        </behaviors:EventHandlerBehavior>
+    </ContentPage.Behaviors>
+
     <ContentPage.Content>
         <StackLayout>
             <Label Text="recording!"

@@ -16,6 +16,7 @@ namespace Appesame.ViewModels
         public Command OkCommand { get; set; }
 
         private string examName = "";
+        //todo change capital letters
         public string ExamName
         {
             get => examName;
@@ -38,10 +39,8 @@ namespace Appesame.ViewModels
 
         private async Task AddExamToDatabase()
         {
-            ExamModel exam = new ExamModel();
-            exam.Name = ExamName;
+            DataService.AddExam(ExamName);
             ExamName = "";
-            DataService.AddExam(exam);
             await Shell.Current.GoToAsync("//ExamChooser", true);
         }
     }

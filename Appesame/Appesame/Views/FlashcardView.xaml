@@ -40,10 +40,7 @@
     <ContentPage.Content>
         <StackLayout>
             <ListView ItemsSource="{Binding FlashcardModelList}"
-                      x:Name="listView">
-                <ListView.Behaviors>
-                    <bh:ItemTappedBehavior Command="{Binding ItemTappedCommand}"/>
-                </ListView.Behaviors>
+                      x:Name="listViewf">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -59,16 +56,6 @@
                                 <Label Grid.Column="1"
                                     Text="{Binding Name}"
                                     FontAttributes="Bold" />
-                                <ImageButton Grid.Column="2"
-                                            HeightRequest="60" WidthRequest="140" IsVisible="True"
-                                            Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference listView}}" 
-                                            CommandParameter="{Binding .}">
-                                    <ImageButton.Source>
-                                        <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
-                                                         Glyph="&#xf1f8;"
-                                                         Size="Small"/>
-                                    </ImageButton.Source>
-                                </ImageButton>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

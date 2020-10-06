@@ -4,12 +4,27 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Appesame.ViewModels
 {
+    [QueryProperty("ItemName", "itemName")]
     public class AddItemViewModel : BaseViewModel
     {
+        private string _ItemName;
+        public string ItemName
+        {
+            get 
+            {
+                return _ItemName;
+            }
+            set
+            {
+                _ItemName = Uri.UnescapeDataString(value);
+                OnPropertyChanged(ItemName);
+            }
+        }
         private string _fileName = "";
         public string fileName
         {
@@ -45,9 +60,8 @@ namespace Appesame.ViewModels
         }
         private async Task AddItemToDatabase()
         {
-            var itemName = "Flashcard";
-            var examName = "test";
-            DataService.AddItem(examName,itemName,fileName,fileUri);
+            var examName = Preferences.Get("CurrentExam","");
+            DataService.AddItem(examName, ItemName, fileName,fileUri);
             await Shell.Current.GoToAsync("//Tabbar", true);
         }
     }

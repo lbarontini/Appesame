@@ -24,26 +24,25 @@ namespace Appesame.ViewModels
             }
         }
 
-        public IEnumerable<ItemModel> FlashcardModelList { get; }
+        public IEnumerable<FlashcardModel> FlashcardModelList { get; set; }
         public ICommand GoBackCommand { get; set; }
         public ICommand OnAppearingCommand { get; set; }
         public ICommand AddCommand { get; set; }
-
         public Command<object> DeleteCommand { get; set; }
 
         public FlashcardViewModel()
         {
-            FlashcardModelList = DataService.GetAllItems("Flashcards", ExamName);
-
-            GoBackCommand = new Command(async () => await GoBack());
             OnAppearingCommand = new Command(GetExamName);
+            FlashcardModelList = DataService.GetAllItems("Flashcards", Preferences.Get("CurrentExam", "Flashcard"));
+            GoBackCommand = new Command(async () => await GoBack());          
             AddCommand = new Command(async () => await AddItem());
             DeleteCommand = new Command<object>(DeleteItem);
         }
-
         private void GetExamName()
         {
             ExamName = Preferences.Get("CurrentExam", "Flashcard");
+            FlashcardModelList = DataService.GetAllItems("Flashcards", ExamName);
+            OnPropertyChanged("FlashcardModelList");
         }
         private async Task GoBack()
         {
@@ -51,7 +50,7 @@ namespace Appesame.ViewModels
         }
         private async Task AddItem()
         {
-            await Shell.Current.GoToAsync("Flashcards/addItem", true);
+            await Shell.Current.GoToAsync($"Flashcards/addItem?itemName=Flashcard");
         }
         private void DeleteItem(object obj)
         {

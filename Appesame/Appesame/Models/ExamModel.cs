@@ -10,8 +10,6 @@ namespace Appesame.Models
     {
         [PrimaryKey]
         public string Name { get; set; }
-        public IList<ItemModel> FlashcardList { get; }
-        public IList<ItemModel> RecordingList { get; }
 
     }
 }

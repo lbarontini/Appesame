@@ -31,8 +31,12 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <Entry Placeholder="Insert Item Name"/>
-            <Button Text="Search"/>
+            <Entry Placeholder="Insert Item Name"
+                   Text="{Binding fileName, Mode=TwoWay}"/>           
+            <Entry Placeholder="Insert Item Uri"
+                   Text="{Binding fileUri, Mode=TwoWay}"/>
+            <Button Text="Search"
+                    Command="{Binding SearchCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -9,20 +9,20 @@ using Xamarin.Forms;
 
 namespace Appesame.ViewModels
 {
-    [QueryProperty("ItemName", "itemName")]
+    [QueryProperty("itemName", "itemName")]
     public class AddItemViewModel : BaseViewModel
     {
-        private string _ItemName;
-        public string ItemName
+        private string _itemName;
+        public string itemName
         {
             get 
             {
-                return _ItemName;
+                return _itemName;
             }
             set
             {
-                _ItemName = Uri.UnescapeDataString(value);
-                OnPropertyChanged(ItemName);
+                _itemName = Uri.UnescapeDataString(value);
+                OnPropertyChanged(itemName);
             }
         }
         private string _fileName = "";
@@ -48,12 +48,15 @@ namespace Appesame.ViewModels
         }
         public Command GoBackCommand { get; set; }
         public Command OkCommand { get; set; }
+        public Command SearchCommand { get; set; }
 
         public AddItemViewModel()
         {
             GoBackCommand = new Command(async () => await GoBack());
             OkCommand = new Command(async () => await AddItemToDatabase());
+            SearchCommand = new Command(async () => await ChooseFile());
         }
+
         private async Task GoBack()
         {
             await Shell.Current.GoToAsync("//Tabbar", true);
@@ -61,8 +64,24 @@ namespace Appesame.ViewModels
         private async Task AddItemToDatabase()
         {
             var examName = Preferences.Get("CurrentExam","");
-            DataService.AddItem(examName, ItemName, fileName,fileUri);
+            DataService.AddItem(examName, itemName, fileName,fileUri);
             await Shell.Current.GoToAsync("//Tabbar", true);
+        }
+        private async Task ChooseFile()
+        {
+            try
+            {
+                var result = await FilePicker.PickAsync();
+                if (result != null)
+                {
+                    fileName = result.FileName;
+                    fileUri = result.FullPath;
+                }
+            }
+            catch (Exception ex)
+            {
+                // The user canceled or something went wrong
+            }          
         }
     }
 }

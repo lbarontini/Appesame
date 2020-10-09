@@ -28,20 +28,21 @@ namespace Appesame.ViewModels
         public ICommand GoBackCommand { get; set; }
         public ICommand OnAppearingCommand { get; set; }
         public ICommand AddCommand { get; set; }
+        public ICommand ItemTappedCommand { get; set; }
         public Command<object> DeleteCommand { get; set; }
 
         public FlashcardViewModel()
         {
-            OnAppearingCommand = new Command(GetExamName);
-            FlashcardModelList = DataService.GetAllItems("Flashcards", Preferences.Get("CurrentExam", "Flashcard"));
+            OnAppearingCommand = new Command(OnAppearing);
             GoBackCommand = new Command(async () => await GoBack());          
             AddCommand = new Command(async () => await AddItem());
+            ItemTappedCommand = new Command<FlashcardModel>(async (x) => await OnItemSelectedAsync(x));
             DeleteCommand = new Command<object>(DeleteItem);
         }
-        private void GetExamName()
+        private void OnAppearing()
         {
-            ExamName = Preferences.Get("CurrentExam", "Flashcard");
-            FlashcardModelList = DataService.GetAllItems("Flashcards", ExamName);
+            ExamName = Preferences.Get("CurrentExam", "Flashcards");
+            FlashcardModelList = DataService.GetAllItems("Flashcard", ExamName) as IEnumerable<FlashcardModel>;
             OnPropertyChanged("FlashcardModelList");
         }
         private async Task GoBack()
@@ -52,9 +53,15 @@ namespace Appesame.ViewModels
         {
             await Shell.Current.GoToAsync($"Flashcards/addItem?itemName=Flashcard");
         }
+        private async Task OnItemSelectedAsync(FlashcardModel x)
+        {
+            Uri uriToOpen = new Uri(x.Uri);
+            if (await Xamarin.Essentials.Launcher.CanOpenAsync(uriToOpen))
+                await Xamarin.Essentials.Launcher.OpenAsync(uriToOpen);
+        }
         private void DeleteItem(object obj)
         {
-            DataService.DeleteItem(obj);
+            DataService.DeleteItem(obj, "Flashcard");
         }
     }
 }

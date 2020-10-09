@@ -25,7 +25,7 @@ namespace Appesame.ViewModels
         }
         private async Task OnItemSelectedAsync(ExamModel examModel)
         {
-            Preferences.Set("CurrentExam", examModel.Name);
+            Preferences.Set("CurrentExam", examModel.name);
             await Shell.Current.GoToAsync("//Tabbar", true);   
         }
         private async Task AddExam() 

@@ -8,8 +8,10 @@ namespace Appesame.Models
 {
     public class ExamModel : RealmObject
     {
+        public string name { get; set; }
+
         [PrimaryKey]
-        public string Name { get; set; }
+        public string examID { get; set; } = Guid.NewGuid().ToString();
 
     }
 }

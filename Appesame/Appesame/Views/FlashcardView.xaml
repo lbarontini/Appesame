@@ -40,22 +40,47 @@
     <ContentPage.Content>
         <StackLayout>
             <ListView ItemsSource="{Binding FlashcardModelList}"
-                      x:Name="listViewf">
+                      x:Name="FlashcardlistView">
+                <ListView.Behaviors>
+                    <bh:ItemTappedBehavior Command="{Binding ItemTappedCommand}"/>
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid Padding="10">
+                            <Grid Margin="20,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="0,5*" />
+                                    <ColumnDefinition Width="0,3*" />
+                                    <ColumnDefinition Width="0,2*" />                                    
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="1"
-                                    Text="{Binding Name}"
-                                    FontAttributes="Bold" />
+                                <Label Grid.Column="0"
+                                       Grid.Row="0"
+                                       Text="{Binding Name}"
+                                       FontAttributes="Bold" 
+                                       FontSize="20"
+                                       HorizontalOptions="StartAndExpand"
+                                       VerticalOptions="Center"/>
+                                <CheckBox Grid.Column="1"
+                                          Grid.Row="0"
+                                          IsChecked="{Binding IsMemorized, Mode=TwoWay}}"
+                                          HorizontalOptions="CenterAndExpand"
+                                          VerticalOptions="Center"
+                                          Color="Green"/>
+                                <Button Grid.Column="2"
+                                        Grid.Row="0"
+                                        Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference FlashcardlistView}}" 
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="Green"
+                                        CornerRadius="10"
+                                        Text="&#xf1f8;"
+                                        TextColor="White"
+                                        FontFamily="{StaticResource FontAwesomeSolid}"
+                                        FontSize="20"
+                                        HorizontalOptions="EndAndExpand"
+                                        VerticalOptions="CenterAndExpand"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

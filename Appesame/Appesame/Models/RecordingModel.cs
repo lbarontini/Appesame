@@ -1,12 +1,11 @@
 ﻿using Realms;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace Appesame.Models
 {
-    public class FlashcardModel : RealmObject
+    public class RecordingModel : RealmObject
     {
         [PrimaryKey]
         public string FlahcardID { get; set; } = Guid.NewGuid().ToString();

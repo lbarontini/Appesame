@@ -12,14 +12,14 @@ namespace Appesame.ViewModels
 {
     public class RecordingViewModel : BaseViewModel
     {
-        private string examName = "";
-        public string ExamName
+        private string _examName = "";
+        public string examName
         {
-            get => examName;
+            get => _examName;
             set
             {
-                examName = value;
-                OnPropertyChanged("ExamName");
+                _examName = value;
+                OnPropertyChanged("examName");
             }
         }
 
@@ -27,6 +27,7 @@ namespace Appesame.ViewModels
         public ICommand GoBackCommand { get; set; }
         public ICommand OnAppearingCommand { get; set; }
         public ICommand AddCommand { get; set; }
+        public ICommand ItemTappedCommand { get; set; }
         public Command<object> DeleteCommand { get; set; }
 
         public RecordingViewModel()
@@ -34,12 +35,13 @@ namespace Appesame.ViewModels
             OnAppearingCommand = new Command(OnAppearing);
             GoBackCommand = new Command(async () => await GoBack());
             AddCommand = new Command(async () => await AddItem());
+            ItemTappedCommand = new Command<RecordingModel>(async (x) => await OnItemSelectedAsync(x));
             DeleteCommand = new Command<object>(DeleteItem);
         }
         private void OnAppearing()
         {
-            ExamName = Preferences.Get("CurrentExam", "Recordings");
-            RecordingModelList = DataService.GetAllItems("Recording", ExamName) as IEnumerable<RecordingModel>;
+            examName = Preferences.Get("CurrentExam", "Recordings");
+            RecordingModelList = DataService.GetAllItems("Recording", examName) as IEnumerable<RecordingModel>;
             OnPropertyChanged("RecordingModelList");
         }
         private async Task GoBack()
@@ -49,6 +51,18 @@ namespace Appesame.ViewModels
         private async Task AddItem()
         {
             await Shell.Current.GoToAsync($"Recordings/addItem?itemName=Recording");
+        }
+
+        private async Task OnItemSelectedAsync(RecordingModel x)
+        {
+            //Uri uriToOpen = new Uri(x.Uri);           
+            if (await Launcher.CanOpenAsync(x.Uri))
+            {
+                await Launcher.OpenAsync(new OpenFileRequest
+                {
+                    File = new ReadOnlyFile(x.Uri, "audio/*")
+                });
+            }
         }
         private void DeleteItem(object obj)
         {

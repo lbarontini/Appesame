@@ -5,7 +5,7 @@
              xmlns:bh="clr-namespace:Appesame.ViewModels.Behaviors" 
              xmlns:behaviors="clr-namespace:Behaviors;assembly=Behaviors"
              x:Class="Appesame.Views.FlashcardView"             
-             Title="{Binding ExamName}">
+             Title="{Binding examName}">
     
     <ContentPage.BindingContext>
         <vm:FlashcardViewModel/>
@@ -65,7 +65,7 @@
                                        VerticalOptions="Center"/>
                                 <CheckBox Grid.Column="1"
                                           Grid.Row="0"
-                                          IsChecked="{Binding IsMemorized, Mode=TwoWay}}"
+                                          IsChecked="{Binding IsMemorized, Mode=TwoWay}"
                                           HorizontalOptions="CenterAndExpand"
                                           VerticalOptions="Center"
                                           Color="Green"/>

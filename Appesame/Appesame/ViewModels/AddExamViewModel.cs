@@ -15,14 +15,13 @@ namespace Appesame.ViewModels
         public Command GoBackCommand { get; set; }
         public Command OkCommand { get; set; }
 
-        private string examName = "";
-        //todo change capital letters
-        public string ExamName
+        private string _examName = "";        
+        public string examName
         {
-            get => examName;
+            get => _examName;
             set
             {
-                examName = value;
+                _examName = value;
                 OnPropertyChanged("ExamName");
             }
         }
@@ -39,9 +38,17 @@ namespace Appesame.ViewModels
 
         private async Task AddExamToDatabase()
         {
-            DataService.AddExam(ExamName);
-            ExamName = "";
-            await Shell.Current.GoToAsync("//ExamChooser", true);
+            if (string.IsNullOrWhiteSpace(examName))
+            { 
+                await App.Current.MainPage.DisplayAlert("Error", "Enter exam name ", "OK");
+                examName = "";
+            }
+            else
+            {
+                DataService.AddExam(examName);
+                examName = "";
+                await Shell.Current.GoToAsync("//ExamChooser", true);
+            }
         }
     }
 }

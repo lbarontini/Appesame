@@ -13,14 +13,14 @@ namespace Appesame.ViewModels
 {
     public class FlashcardViewModel : BaseViewModel
     {
-        private string examName = "";
-        public string ExamName 
+        private string _examName = "";
+        public string examName 
         {
-            get => examName;
+            get => _examName;
             set
             {
-                examName = value;
-                OnPropertyChanged("ExamName");
+                _examName = value;
+                OnPropertyChanged("examName");
             }
         }
 
@@ -41,8 +41,8 @@ namespace Appesame.ViewModels
         }
         private void OnAppearing()
         {
-            ExamName = Preferences.Get("CurrentExam", "Flashcards");
-            FlashcardModelList = DataService.GetAllItems("Flashcard", ExamName) as IEnumerable<FlashcardModel>;
+            examName = Preferences.Get("CurrentExam", "Flashcards");
+            FlashcardModelList = DataService.GetAllItems("Flashcard", examName) as IEnumerable<FlashcardModel>;
             OnPropertyChanged("FlashcardModelList");
         }
         private async Task GoBack()
@@ -56,8 +56,16 @@ namespace Appesame.ViewModels
         private async Task OnItemSelectedAsync(FlashcardModel x)
         {
             Uri uriToOpen = new Uri(x.Uri);
-            if (await Xamarin.Essentials.Launcher.CanOpenAsync(uriToOpen))
-                await Xamarin.Essentials.Launcher.OpenAsync(uriToOpen);
+            if (await Launcher.CanOpenAsync(uriToOpen))
+            {
+                await Launcher.OpenAsync(new OpenFileRequest
+                {
+                    File = new ReadOnlyFile(x.Uri)
+                    {
+                        ContentType = "application/pdf"
+                    }
+                });
+            }
         }
         private void DeleteItem(object obj)
         {

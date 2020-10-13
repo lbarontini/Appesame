@@ -19,7 +19,8 @@ namespace Appesame
             InitializeComponent();
             Routing.RegisterRoute("Flashcards/addItem", typeof(AddItemView));
             Routing.RegisterRoute("Recordings/addItem", typeof(AddItemView));
-            Routing.RegisterRoute("ExamChooser/Tabbar/Flashcards", typeof(FlashcardView));
+            Routing.RegisterRoute("Cmaps/addItem", typeof(AddItemView));
+            Routing.RegisterRoute("Exercises/addItem", typeof(AddItemView));
         }
     }
 }

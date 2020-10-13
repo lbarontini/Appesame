@@ -85,6 +85,18 @@ namespace Appesame.ViewModels
                         FileTypes = CustomFilePickerFileType.Audio
                     };
                     break;
+                case "Cmap":
+                    opt = new PickOptions
+                    {
+                        FileTypes = FilePickerFileType.Images
+                    };
+                    break;
+                case "Exercise":
+                    opt = new PickOptions
+                    {
+                        FileTypes = CustomFilePickerFileType.Pdf
+                    };
+                    break;
                 default:
                     opt = new PickOptions
                     {

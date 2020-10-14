@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace Appesame.ViewModels
 {
-    public class RecordingViewModel : BaseViewModel
+    public class ExerciseViewModel : BaseViewModel
     {
         private string _examName = "";
         public string examName
@@ -23,26 +23,26 @@ namespace Appesame.ViewModels
             }
         }
 
-        public IEnumerable<RecordingModel> RecordingModelList { get; set; }
+        public IEnumerable<ExerciseModel> ExerciseModelList { get; set; }
         public ICommand GoBackCommand { get; set; }
         public ICommand OnAppearingCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand ItemTappedCommand { get; set; }
         public Command<object> DeleteCommand { get; set; }
 
-        public RecordingViewModel()
+        public ExerciseViewModel()
         {
             OnAppearingCommand = new Command(OnAppearing);
             GoBackCommand = new Command(async () => await GoBack());
             AddCommand = new Command(async () => await AddItem());
-            ItemTappedCommand = new Command<RecordingModel>(async (x) => await OnItemSelectedAsync(x));
+            ItemTappedCommand = new Command<ExerciseModel>(async (x) => await OnItemSelectedAsync(x));
             DeleteCommand = new Command<object>(DeleteItem);
         }
         private void OnAppearing()
         {
-            examName = Preferences.Get("CurrentExam", "Recordings");
-            RecordingModelList = DataService.GetAllItems("Recording", examName) as IEnumerable<RecordingModel>;
-            OnPropertyChanged("RecordingModelList");
+            examName = Preferences.Get("CurrentExam", "Exercises");
+            ExerciseModelList = DataService.GetAllItems("Exercise", examName) as IEnumerable<ExerciseModel>;
+            OnPropertyChanged("ExerciseModelList");
         }
         private async Task GoBack()
         {
@@ -50,23 +50,26 @@ namespace Appesame.ViewModels
         }
         private async Task AddItem()
         {
-            await Shell.Current.GoToAsync($"Recordings/addItem?itemName=Recording");
+            await Shell.Current.GoToAsync($"Exercises/addItem?itemName=Exercise");
         }
-
-        private async Task OnItemSelectedAsync(RecordingModel x)
+        private async Task OnItemSelectedAsync(ExerciseModel x)
         {
-            //Uri uriToOpen = new Uri(x.Uri);           
-            if (await Launcher.CanOpenAsync(x.Uri))
+            Uri uriToOpen = new Uri(x.Uri);
+            if (await Launcher.CanOpenAsync(uriToOpen))
             {
                 await Launcher.OpenAsync(new OpenFileRequest
                 {
-                    File = new ReadOnlyFile(x.Uri, "audio/*")
+                    File = new ReadOnlyFile(x.Uri)
+                    {
+                        ContentType = "application/pdf"
+                    }
                 });
             }
         }
         private void DeleteItem(object obj)
         {
-            DataService.DeleteItem(obj, "Recording");
+            DataService.DeleteItem(obj, "Exercise");
         }
     }
 }
+

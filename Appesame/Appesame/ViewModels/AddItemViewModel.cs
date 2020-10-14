@@ -1,4 +1,5 @@
 ﻿using Appesame.Data;
+using Appesame.ViewModels.Utilities;
 using MvvmHelpers;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Appesame.ViewModels
             set
             {
                 _itemName = Uri.UnescapeDataString(value);
-                OnPropertyChanged(itemName);
+                //OnPropertyChanged(itemName);
             }
         }
         private string _fileName = "";
@@ -69,9 +70,43 @@ namespace Appesame.ViewModels
         }
         private async Task ChooseFile()
         {
+            PickOptions opt;
+            switch (itemName)
+            {
+                case "Flashcard":
+                    opt = new PickOptions
+                    {
+                        FileTypes = CustomFilePickerFileType.Pdf
+                    };
+                    break;
+                case "Recording":
+                    opt = new PickOptions
+                    {
+                        FileTypes = CustomFilePickerFileType.Audio
+                    };
+                    break;
+                case "Cmap":
+                    opt = new PickOptions
+                    {
+                        FileTypes = FilePickerFileType.Images
+                    };
+                    break;
+                case "Exercise":
+                    opt = new PickOptions
+                    {
+                        FileTypes = CustomFilePickerFileType.Pdf
+                    };
+                    break;
+                default:
+                    opt = new PickOptions
+                    {
+                        FileTypes = FilePickerFileType.Images
+                    };
+                    break;
+            }
             try
             {
-                var result = await FilePicker.PickAsync();
+                var result = await FilePicker.PickAsync(opt);
                 if (result != null)
                 {
                     fileName = result.FileName;

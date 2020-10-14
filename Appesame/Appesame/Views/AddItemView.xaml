@@ -33,8 +33,7 @@
         <StackLayout>
             <Entry Placeholder="Insert Item Name"
                    Text="{Binding fileName, Mode=TwoWay}"/>           
-            <Entry Placeholder="Insert Item Uri"
-                   Text="{Binding fileUri, Mode=TwoWay}"/>
+            <Label Text="{Binding fileUri, Mode=TwoWay}"/>
             <Button Text="Search"
                     Command="{Binding SearchCommand}"/>
         </StackLayout>

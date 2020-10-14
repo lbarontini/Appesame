@@ -1,15 +1,14 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Realms;
 namespace Appesame.Models
 {
-    public class FlashcardModel : RealmObject
+    public class CmapModel : RealmObject
     {
         [PrimaryKey]
-        public string FlahcardID { get; set; } = Guid.NewGuid().ToString();
+        public string CmapID { get; set; } = Guid.NewGuid().ToString();
         public string Name { get; set; }
         public string Uri { get; set; }
         public bool IsMemorized { get; set; }

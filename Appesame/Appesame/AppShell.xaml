@@ -51,5 +51,11 @@
         <Tab Title="Recordings">
             <ShellContent ContentTemplate="{DataTemplate views:RecordingView}"/>
         </Tab>
+        <Tab Title="Cmaps">
+            <ShellContent ContentTemplate="{DataTemplate views:CmapView}"/>
+        </Tab>
+        <Tab Title="Exercises">
+            <ShellContent ContentTemplate="{DataTemplate views:ExerciseView}"/>
+        </Tab>
     </TabBar>
 </Shell>

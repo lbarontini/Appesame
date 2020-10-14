@@ -1,4 +1,5 @@
-﻿using Appesame.Data;
+﻿
+using Appesame.Data;
 using Appesame.Models;
 using MvvmHelpers;
 using System;
@@ -10,7 +11,7 @@ using Xamarin.Forms;
 
 namespace Appesame.ViewModels
 {
-    public class RecordingViewModel : BaseViewModel
+    public class CmapViewModel : BaseViewModel
     {
         private string _examName = "";
         public string examName
@@ -23,26 +24,26 @@ namespace Appesame.ViewModels
             }
         }
 
-        public IEnumerable<RecordingModel> RecordingModelList { get; set; }
+        public IEnumerable<CmapModel> CmapModelList { get; set; }
         public ICommand GoBackCommand { get; set; }
         public ICommand OnAppearingCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand ItemTappedCommand { get; set; }
         public Command<object> DeleteCommand { get; set; }
 
-        public RecordingViewModel()
+        public CmapViewModel()
         {
             OnAppearingCommand = new Command(OnAppearing);
             GoBackCommand = new Command(async () => await GoBack());
             AddCommand = new Command(async () => await AddItem());
-            ItemTappedCommand = new Command<RecordingModel>(async (x) => await OnItemSelectedAsync(x));
+            ItemTappedCommand = new Command<CmapModel>(async (x) => await OnItemSelectedAsync(x));
             DeleteCommand = new Command<object>(DeleteItem);
         }
         private void OnAppearing()
         {
-            examName = Preferences.Get("CurrentExam", "Recordings");
-            RecordingModelList = DataService.GetAllItems("Recording", examName) as IEnumerable<RecordingModel>;
-            OnPropertyChanged("RecordingModelList");
+            examName = Preferences.Get("CurrentExam", "Cmaps");
+            CmapModelList = DataService.GetAllItems("Cmap", examName) as IEnumerable<CmapModel>;
+            OnPropertyChanged("CmapModelList");
         }
         private async Task GoBack()
         {
@@ -50,23 +51,25 @@ namespace Appesame.ViewModels
         }
         private async Task AddItem()
         {
-            await Shell.Current.GoToAsync($"Recordings/addItem?itemName=Recording");
+            await Shell.Current.GoToAsync($"Cmaps/addItem?itemName=Cmap");
         }
-
-        private async Task OnItemSelectedAsync(RecordingModel x)
+        private async Task OnItemSelectedAsync(CmapModel x)
         {
-            //Uri uriToOpen = new Uri(x.Uri);           
-            if (await Launcher.CanOpenAsync(x.Uri))
+            Uri uriToOpen = new Uri(x.Uri);
+            if (await Launcher.CanOpenAsync(uriToOpen))
             {
                 await Launcher.OpenAsync(new OpenFileRequest
                 {
-                    File = new ReadOnlyFile(x.Uri, "audio/*")
+                    File = new ReadOnlyFile(x.Uri)
+                    {
+                        ContentType = "image/*"
+                    }
                 });
             }
         }
         private void DeleteItem(object obj)
         {
-            DataService.DeleteItem(obj, "Recording");
+            DataService.DeleteItem(obj, "Cmap");
         }
     }
 }

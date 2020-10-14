@@ -4,11 +4,11 @@
              xmlns:vm="clr-namespace:Appesame.ViewModels"
              xmlns:bh="clr-namespace:Appesame.ViewModels.Behaviors" 
              xmlns:behaviors="clr-namespace:Behaviors;assembly=Behaviors"
-             x:Class="Appesame.Views.FlashcardView"             
+             x:Class="Appesame.Views.ExerciseView"             
              Title="{Binding examName}">
-    
+
     <ContentPage.BindingContext>
-        <vm:FlashcardViewModel/>
+        <vm:ExerciseViewModel/>
     </ContentPage.BindingContext>
 
     <Shell.BackButtonBehavior>
@@ -39,8 +39,8 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <ListView ItemsSource="{Binding FlashcardModelList}"
-                      x:Name="FlashcardlistView">
+            <ListView ItemsSource="{Binding ExerciseModelList}"
+                      x:Name="ExerciselistView">
                 <ListView.Behaviors>
                     <bh:ItemTappedBehavior Command="{Binding ItemTappedCommand}"/>
                 </ListView.Behaviors>
@@ -54,7 +54,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="0,5*" />
                                     <ColumnDefinition Width="0,3*" />
-                                    <ColumnDefinition Width="0,2*" />                                    
+                                    <ColumnDefinition Width="0,2*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0"
                                        Grid.Row="0"
@@ -71,7 +71,7 @@
                                           Color="Green"/>
                                 <Button Grid.Column="2"
                                         Grid.Row="0"
-                                        Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference FlashcardlistView}}" 
+                                        Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference ExerciselistView}}" 
                                         CommandParameter="{Binding .}"
                                         BackgroundColor="Green"
                                         CornerRadius="10"

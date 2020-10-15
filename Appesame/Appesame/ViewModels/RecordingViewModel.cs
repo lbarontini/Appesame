@@ -12,14 +12,14 @@ namespace Appesame.ViewModels
 {
     public class RecordingViewModel : BaseViewModel
     {
-        private string _examName = "";
-        public string examName
+        private string _ExamName = "";
+        public string ExamName
         {
-            get => _examName;
+            get => _ExamName;
             set
             {
-                _examName = value;
-                OnPropertyChanged("examName");
+                _ExamName = value;
+                OnPropertyChanged("ExamName");
             }
         }
 
@@ -40,8 +40,8 @@ namespace Appesame.ViewModels
         }
         private void OnAppearing()
         {
-            examName = Preferences.Get("CurrentExam", "Recordings");
-            RecordingModelList = DataService.GetAllItems("Recording", examName) as IEnumerable<RecordingModel>;
+            ExamName = Preferences.Get("CurrentExam", "Recordings");
+            RecordingModelList = DataService.GetAllItems("Recording", ExamName) as IEnumerable<RecordingModel>;
             OnPropertyChanged("RecordingModelList");
         }
         private async Task GoBack()
@@ -50,7 +50,7 @@ namespace Appesame.ViewModels
         }
         private async Task AddItem()
         {
-            await Shell.Current.GoToAsync($"Recordings/addItem?itemName=Recording");
+            await Shell.Current.GoToAsync($"Recordings/addItem?ItemName=Recording");
         }
 
         private async Task OnItemSelectedAsync(RecordingModel x)

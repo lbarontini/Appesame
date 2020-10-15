@@ -10,41 +10,41 @@ using Xamarin.Forms;
 
 namespace Appesame.ViewModels
 {
-    [QueryProperty("itemName", "itemName")]
+    [QueryProperty("ItemName", "ItemName")]
     public class AddItemViewModel : BaseViewModel
     {
-        private string _itemName;
-        public string itemName
+        private string _ItemName;
+        public string ItemName
         {
             get 
             {
-                return _itemName;
+                return _ItemName;
             }
             set
             {
-                _itemName = Uri.UnescapeDataString(value);
-                //OnPropertyChanged(itemName);
+                _ItemName = Uri.UnescapeDataString(value);
+                OnPropertyChanged(ItemName);
             }
         }
-        private string _fileName = "";
-        public string fileName
+        private string _FileName = "";
+        public string FileName
         {
-            get => _fileName;
+            get => _FileName;
             set
             {
-                _fileName = value;
-                OnPropertyChanged("fileName");
+                _FileName = value;
+                OnPropertyChanged("FileName");
             }
         }
 
-        private string _fileUri = "";
-        public string fileUri
+        private string _FileUri = "";
+        public string FileUri
         {
-            get => _fileUri;
+            get => _FileUri;
             set
             {
-                _fileUri = value;
-                OnPropertyChanged("fileUri");
+                _FileUri = value;
+                OnPropertyChanged("FileUri");
             }
         }
         public Command GoBackCommand { get; set; }
@@ -64,14 +64,18 @@ namespace Appesame.ViewModels
         }
         private async Task AddItemToDatabase()
         {
-            var examName = Preferences.Get("CurrentExam","");
-            DataService.AddItem(examName, itemName, fileName,fileUri);
-            await Shell.Current.GoToAsync("//Tabbar", true);
+            if (string.IsNullOrWhiteSpace(FileName) || string.IsNullOrWhiteSpace(FileUri))
+                await App.Current.MainPage.DisplayAlert("Error", "Please choose a file", "OK");
+            else
+            {
+                DataService.AddItem(Preferences.Get("CurrentExam", ""), ItemName, FileName, FileUri);
+                await Shell.Current.GoToAsync("//Tabbar", true);
+            }
         }
         private async Task ChooseFile()
         {
             PickOptions opt;
-            switch (itemName)
+            switch (ItemName)
             {
                 case "Flashcard":
                     opt = new PickOptions
@@ -104,19 +108,16 @@ namespace Appesame.ViewModels
                     };
                     break;
             }
-            try
-            {
                 var result = await FilePicker.PickAsync(opt);
-                if (result != null)
-                {
-                    fileName = result.FileName;
-                    fileUri = result.FullPath;
-                }
-            }
-            catch (Exception ex)
+            if (result != null)
             {
-                // The user canceled or something went wrong
-            }          
+                FileName = result.FileName;
+                FileUri = result.FullPath;
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "something went wrong", "OK");
+            }
         }
     }
 }

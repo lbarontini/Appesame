@@ -2,11 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Appesame.ViewModels"
-             xmlns:bh="clr-namespace:Appesame.ViewModels.Behaviors" 
-             xmlns:behaviors="clr-namespace:Behaviors;assembly=Behaviors"
+             xmlns:bh="clr-namespace:Appesame.ViewModels.Behaviors"
              x:Class="Appesame.Views.ExamView"
              x:Name="Exam"
-             Title="Exams">
+             Title="Studied!">
 
     <ContentPage.BindingContext>
         <vm:ExamViewModel/>
@@ -32,10 +31,14 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid Margin="20, 0,0,0">
+                            <Grid Margin="20,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0,5*" />                                    
+                                    <ColumnDefinition Width="0,3*" />
+                                </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0"
                                        Grid.Row="0"
                                        Text="{Binding name}"
@@ -54,7 +57,8 @@
                                         FontFamily="{StaticResource FontAwesomeSolid}"
                                         FontSize="20"
                                         HorizontalOptions="EndAndExpand"
-                                        VerticalOptions="CenterAndExpand"/>
+                                        VerticalOptions="CenterAndExpand"
+                                        Margin="0,2,2,0"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

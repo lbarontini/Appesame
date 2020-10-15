@@ -4,6 +4,7 @@ using Appesame.Models;
 using MvvmHelpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -13,14 +14,14 @@ namespace Appesame.ViewModels
 {
     public class FlashcardViewModel : BaseViewModel
     {
-        private string _examName = "";
-        public string examName 
+        private string _ExamName = "";
+        public string ExamName 
         {
-            get => _examName;
+            get => _ExamName;
             set
             {
-                _examName = value;
-                OnPropertyChanged("examName");
+                _ExamName = value;
+                OnPropertyChanged("ExamName");
             }
         }
 
@@ -41,8 +42,8 @@ namespace Appesame.ViewModels
         }
         private void OnAppearing()
         {
-            examName = Preferences.Get("CurrentExam", "Flashcards");
-            FlashcardModelList = DataService.GetAllItems("Flashcard", examName) as IEnumerable<FlashcardModel>;
+            ExamName = Preferences.Get("CurrentExam", "Flashcards");
+            FlashcardModelList = DataService.GetAllItems("Flashcard", ExamName) as IEnumerable<FlashcardModel>;
             OnPropertyChanged("FlashcardModelList");
         }
         private async Task GoBack()
@@ -51,7 +52,7 @@ namespace Appesame.ViewModels
         }
         private async Task AddItem()
         {
-            await Shell.Current.GoToAsync($"Flashcards/addItem?itemName=Flashcard");
+            await Shell.Current.GoToAsync($"Flashcards/addItem?ItemName=Flashcard");
         }
         private async Task OnItemSelectedAsync(FlashcardModel x)
         {

@@ -12,14 +12,14 @@ namespace Appesame.ViewModels
 {
     public class ExerciseViewModel : BaseViewModel
     {
-        private string _examName = "";
-        public string examName
+        private string _ExamName = "";
+        public string ExamName
         {
-            get => _examName;
+            get => _ExamName;
             set
             {
-                _examName = value;
-                OnPropertyChanged("examName");
+                _ExamName = value;
+                OnPropertyChanged("ExamName");
             }
         }
 
@@ -40,8 +40,8 @@ namespace Appesame.ViewModels
         }
         private void OnAppearing()
         {
-            examName = Preferences.Get("CurrentExam", "Exercises");
-            ExerciseModelList = DataService.GetAllItems("Exercise", examName) as IEnumerable<ExerciseModel>;
+            ExamName = Preferences.Get("CurrentExam", "Exercises");
+            ExerciseModelList = DataService.GetAllItems("Exercise", ExamName) as IEnumerable<ExerciseModel>;
             OnPropertyChanged("ExerciseModelList");
         }
         private async Task GoBack()
@@ -50,7 +50,7 @@ namespace Appesame.ViewModels
         }
         private async Task AddItem()
         {
-            await Shell.Current.GoToAsync($"Exercises/addItem?itemName=Exercise");
+            await Shell.Current.GoToAsync($"Exercises/addItem?ItemName=Exercise");
         }
         private async Task OnItemSelectedAsync(ExerciseModel x)
         {

@@ -5,7 +5,7 @@
              xmlns:bh="clr-namespace:Appesame.ViewModels.Behaviors" 
              xmlns:behaviors="clr-namespace:Behaviors;assembly=Behaviors"
              x:Class="Appesame.Views.ExerciseView"             
-             Title="{Binding examName}">
+             Title="{Binding ExamName}">
 
     <ContentPage.BindingContext>
         <vm:ExerciseViewModel/>
@@ -39,6 +39,23 @@
 
     <ContentPage.Content>
         <StackLayout>
+            <Grid Margin="20,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0,4*" />
+                    <ColumnDefinition Width="0,3*" />
+                    <ColumnDefinition Width="0,3*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="1"   
+                       Grid.Row="0"
+                       Text="memorized ?"
+                       FontAttributes="None" 
+                       FontSize="15"
+                       HorizontalOptions="EndAndExpand"
+                       VerticalOptions="CenterAndExpand"/>
+            </Grid>
             <ListView ItemsSource="{Binding ExerciseModelList}"
                       x:Name="ExerciselistView">
                 <ListView.Behaviors>
@@ -53,8 +70,8 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="0,5*" />
-                                    <ColumnDefinition Width="0,3*" />
                                     <ColumnDefinition Width="0,2*" />
+                                    <ColumnDefinition Width="0,3*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0"
                                        Grid.Row="0"
@@ -66,7 +83,7 @@
                                 <CheckBox Grid.Column="1"
                                           Grid.Row="0"
                                           IsChecked="{Binding IsMemorized, Mode=TwoWay}"
-                                          HorizontalOptions="CenterAndExpand"
+                                          HorizontalOptions="Start"
                                           VerticalOptions="Center"
                                           Color="Green"/>
                                 <Button Grid.Column="2"
@@ -80,7 +97,8 @@
                                         FontFamily="{StaticResource FontAwesomeSolid}"
                                         FontSize="20"
                                         HorizontalOptions="EndAndExpand"
-                                        VerticalOptions="CenterAndExpand"/>
+                                        VerticalOptions="CenterAndExpand"
+                                        Margin="0,2,2,0"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

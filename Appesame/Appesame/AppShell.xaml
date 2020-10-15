@@ -20,7 +20,6 @@
                 <Setter Property="Shell.TabBarTitleColor" Value="White"/>
             </Style>
             <Style x:Key="MyBaseStyle" TargetType="Element">
-
                 <Setter Property="Shell.ForegroundColor" Value="White" />
                 <Setter Property="Shell.TitleColor" Value="White" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
@@ -30,7 +29,6 @@
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
                 <Setter Property="Shell.TabBarTitleColor" Value="White"/>
             </Style>
-
             <Style TargetType="ShellItem" BasedOn="{StaticResource BaseStyle}" />
             <Style TargetType="TabBar" BasedOn="{StaticResource MyBaseStyle}" />
         </ResourceDictionary>

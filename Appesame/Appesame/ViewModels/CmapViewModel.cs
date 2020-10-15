@@ -13,14 +13,14 @@ namespace Appesame.ViewModels
 {
     public class CmapViewModel : BaseViewModel
     {
-        private string _examName = "";
-        public string examName
+        private string _ExamName = "";
+        public string ExamName
         {
-            get => _examName;
+            get => _ExamName;
             set
             {
-                _examName = value;
-                OnPropertyChanged("examName");
+                _ExamName = value;
+                OnPropertyChanged("ExamName");
             }
         }
 
@@ -41,8 +41,8 @@ namespace Appesame.ViewModels
         }
         private void OnAppearing()
         {
-            examName = Preferences.Get("CurrentExam", "Cmaps");
-            CmapModelList = DataService.GetAllItems("Cmap", examName) as IEnumerable<CmapModel>;
+            ExamName = Preferences.Get("CurrentExam", "Cmaps");
+            CmapModelList = DataService.GetAllItems("Cmap", ExamName) as IEnumerable<CmapModel>;
             OnPropertyChanged("CmapModelList");
         }
         private async Task GoBack()
@@ -51,7 +51,7 @@ namespace Appesame.ViewModels
         }
         private async Task AddItem()
         {
-            await Shell.Current.GoToAsync($"Cmaps/addItem?itemName=Cmap");
+            await Shell.Current.GoToAsync($"Cmaps/addItem?ItemName=Cmap");
         }
         private async Task OnItemSelectedAsync(CmapModel x)
         {

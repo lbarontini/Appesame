@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Appesame.Views.AddItemView"
              xmlns:vm="clr-namespace:Appesame.ViewModels"
-             xmlns:behaviors="clr-namespace:Behaviors;assembly=Behaviors">
+             Title="{Binding ItemName}">
 
     <ContentPage.BindingContext>
         <vm:AddItemViewModel/>
@@ -32,8 +32,8 @@
     <ContentPage.Content>
         <StackLayout>
             <Entry Placeholder="Insert Item Name"
-                   Text="{Binding fileName, Mode=TwoWay}"/>           
-            <Label Text="{Binding fileUri, Mode=TwoWay}"/>
+                   Text="{Binding FileName, Mode=TwoWay}"/>           
+            <Label Text="{Binding FileUri, Mode=TwoWay}"/>
             <Button Text="Search"
                     Command="{Binding SearchCommand}"/>
         </StackLayout>

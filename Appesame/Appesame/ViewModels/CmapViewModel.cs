@@ -55,8 +55,7 @@ namespace Appesame.ViewModels
         }
         private async Task OnItemSelectedAsync(CmapModel x)
         {
-            Uri uriToOpen = new Uri(x.Uri);
-            if (await Launcher.CanOpenAsync(uriToOpen))
+            try
             {
                 await Launcher.OpenAsync(new OpenFileRequest
                 {
@@ -65,6 +64,10 @@ namespace Appesame.ViewModels
                         ContentType = "image/*"
                     }
                 });
+            }
+            catch
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "the file must be misplaced or deleted", "OK");
             }
         }
         private void DeleteItem(object obj)

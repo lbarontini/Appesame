@@ -56,16 +56,22 @@ namespace Appesame.ViewModels
         }
         private async Task OnItemSelectedAsync(FlashcardModel x)
         {
-            Uri uriToOpen = new Uri(x.Uri);
-            if (await Launcher.CanOpenAsync(uriToOpen))
+            try
             {
-                await Launcher.OpenAsync(new OpenFileRequest
+                if (await Launcher.CanOpenAsync(x.Uri))
                 {
-                    File = new ReadOnlyFile(x.Uri)
+                    await Launcher.OpenAsync(new OpenFileRequest
                     {
-                        ContentType = "application/pdf"
-                    }
-                });
+                        File = new ReadOnlyFile(x.Uri)
+                        {
+                            ContentType = "application/pdf"
+                        }
+                    });
+                }
+            }
+            catch
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "the file must be misplaced or deleted", "OK");
             }
         }
         private void DeleteItem(object obj)

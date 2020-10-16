@@ -54,14 +54,20 @@ namespace Appesame.ViewModels
         }
 
         private async Task OnItemSelectedAsync(RecordingModel x)
-        {
-            //Uri uriToOpen = new Uri(x.Uri);           
-            if (await Launcher.CanOpenAsync(x.Uri))
+        {            
+            try
             {
                 await Launcher.OpenAsync(new OpenFileRequest
                 {
-                    File = new ReadOnlyFile(x.Uri, "audio/*")
+                    File = new ReadOnlyFile(x.Uri)
+                    {
+                        ContentType = "audio/*"
+                    }
                 });
+            }
+            catch
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "the file must be misplaced or deleted", "OK");
             }
         }
         private void DeleteItem(object obj)

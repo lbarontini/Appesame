@@ -32,10 +32,17 @@
     <ContentPage.Content>
         <StackLayout>
             <Entry Placeholder="Insert Item Name"
+                   Margin="20,0,20,0"
                    Text="{Binding FileName, Mode=TwoWay}"/>           
-            <Label Text="{Binding FileUri, Mode=TwoWay}"/>
+            <Label Text="{Binding FileUri, Mode=TwoWay}"
+                   Margin="20,0,20,0"/>
             <Button Text="Search"
-                    Command="{Binding SearchCommand}"/>
+                    TextColor="White"
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"
+                    Command="{Binding SearchCommand}"
+                    BackgroundColor="Green"
+                    CornerRadius="5"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

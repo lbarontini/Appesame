@@ -4,6 +4,7 @@ using Xamarin.Forms;
 
 namespace Appesame.ViewModels.Behaviors
 {
+    //class for launching a command when an item of the listview is tapped
     public class ItemTappedBehavior : Behavior<ListView>
     {
         public static readonly BindableProperty CommandProperty = 

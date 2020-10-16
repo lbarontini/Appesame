@@ -17,6 +17,8 @@ namespace Appesame
         public AppShell()
         {
             InitializeComponent();
+            
+            //declaretion for navigating to addItem Page
             Routing.RegisterRoute("Flashcards/addItem", typeof(AddItemView));
             Routing.RegisterRoute("Recordings/addItem", typeof(AddItemView));
             Routing.RegisterRoute("Cmaps/addItem", typeof(AddItemView));

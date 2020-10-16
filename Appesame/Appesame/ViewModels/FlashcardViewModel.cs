@@ -42,6 +42,7 @@ namespace Appesame.ViewModels
         }
         private void OnAppearing()
         {
+            //the name of the exam is retrived from the Preferences
             ExamName = Preferences.Get("CurrentExam", "Flashcards");
             FlashcardModelList = DataService.GetAllItems("Flashcard", ExamName) as IEnumerable<FlashcardModel>;
             OnPropertyChanged("FlashcardModelList");
@@ -52,10 +53,12 @@ namespace Appesame.ViewModels
         }
         private async Task AddItem()
         {
+            //passing item name as parameter when navigating to addItem page 
             await Shell.Current.GoToAsync($"Flashcards/addItem?ItemName=Flashcard");
         }
         private async Task OnItemSelectedAsync(FlashcardModel x)
         {
+            //opening the row corresponding file and handling the exception
             try
             {
                 if (await Launcher.CanOpenAsync(x.Uri))

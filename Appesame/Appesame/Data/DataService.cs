@@ -1,4 +1,5 @@
 ﻿using Appesame.Models;
+using Java.Sql;
 using Realms;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,13 @@ namespace Appesame.Data
 {
     public static class DataService
     {
+        //Database instantiated as singleton
         public static Realm DatabaseInstance = Realm.GetInstance(new RealmConfiguration() { ShouldDeleteIfMigrationNeeded = true });
 
+        //getter for the exams
         public static IEnumerable<ExamModel> GetAllExams() => DatabaseInstance.All<ExamModel>();
+
+        //getter for all the items
         public static IEnumerable<object> GetAllItems(string itemName, string examName)
         {
             switch (itemName)
@@ -29,13 +34,16 @@ namespace Appesame.Data
                     return null;                   
             }
         }
-         
+        
+        //method for adding an exam
         public static void AddExam(String examName)
         {
             ExamModel exam = new ExamModel();
             exam.name = examName;
             DatabaseInstance.Write(() => DatabaseInstance.Add(exam));
         }
+
+        //method for adding one of the Item
         public static void AddItem(string examName, string itemName, string fileName, string fileUri)
         {
             switch (itemName)
@@ -84,9 +92,12 @@ namespace Appesame.Data
                     break;
             }  
         }
+
+        //method for deleting one exam and the relative item
         public static void DeleteExam(object exam)
         {
             var examTodelete = exam as ExamModel;
+            // implementation of onCascade;
             var flashcardsToDelete = DatabaseInstance.All<FlashcardModel>().Where(f => f.ExamName == examTodelete.name).ToList();
             foreach (FlashcardModel flashcard in flashcardsToDelete)
                 DatabaseInstance.Write(() => DatabaseInstance.Remove(flashcard));
@@ -101,6 +112,8 @@ namespace Appesame.Data
                 DatabaseInstance.Write(() => DatabaseInstance.Remove(exercise));
             DatabaseInstance.Write(() => DatabaseInstance.Remove(exam as ExamModel));
         }
+
+        //Method for deleting one specific item
         public static void DeleteItem(object Item, string itemName)
         {
             switch (itemName)

@@ -5,6 +5,7 @@ using Xamarin.Essentials;
 
 namespace Appesame.ViewModels.Utilities
 {
+    //class for declaring file MIME type not included in FilePickerFileType
     public class CustomFilePickerFileType : FilePickerFileType
     {
         public static readonly FilePickerFileType Pdf = AndroidPdfFileType();

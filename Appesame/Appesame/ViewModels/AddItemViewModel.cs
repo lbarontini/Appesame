@@ -22,6 +22,7 @@ namespace Appesame.ViewModels
             }
             set
             {
+                //retriving the parameter passed when navigating to this page
                 _ItemName = Uri.UnescapeDataString(value);
                 OnPropertyChanged(ItemName);
             }
@@ -74,6 +75,7 @@ namespace Appesame.ViewModels
         }
         private async Task ChooseFile()
         {
+            //switching from items for writing in the correct portion of the database
             PickOptions opt;
             switch (ItemName)
             {

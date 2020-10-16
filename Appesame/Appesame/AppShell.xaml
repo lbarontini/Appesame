@@ -5,6 +5,7 @@
        x:Class="Appesame.AppShell"
        BackgroundColor="Green">
 
+    <!--general styling of the app-->
     <Shell.Resources>
         <ResourceDictionary>
             <Color x:Key="NavigationPrimary">#5DAE79</Color>
@@ -34,6 +35,7 @@
         </ResourceDictionary>
     </Shell.Resources>
 
+    <!--declaration of the tabs for navigation-->
     <TabBar Route="ExamChooser">
         <ShellContent ContentTemplate="{DataTemplate views:ExamView}"/>
     </TabBar>

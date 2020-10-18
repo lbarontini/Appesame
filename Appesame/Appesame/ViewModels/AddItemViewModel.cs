@@ -61,7 +61,7 @@ namespace Appesame.ViewModels
 
         private async Task GoBack()
         {
-            await Shell.Current.GoToAsync("//Tabbar", true);
+            await Shell.Current.GoToAsync("../..", true);
         }
         private async Task AddItemToDatabase()
         {
@@ -70,7 +70,7 @@ namespace Appesame.ViewModels
             else
             {
                 DataService.AddItem(Preferences.Get("CurrentExam", ""), ItemName, FileName, FileUri);
-                await Shell.Current.GoToAsync("//Tabbar", true);
+                await Shell.Current.GoToAsync("../..", true);
             }
         }
         private async Task ChooseFile()

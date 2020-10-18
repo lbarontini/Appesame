@@ -24,8 +24,7 @@ namespace Appesame.ViewModels
                 OnPropertyChanged("ExamName");
             }
         }
-
-        public IEnumerable<FlashcardModel> FlashcardModelList { get; set; }
+        public IEnumerable<FlashcardModel> FlashcardModelList => DataService.GetAllItems("Flashcard", ExamName) as IEnumerable<FlashcardModel>;
         public ICommand GoBackCommand { get; set; }
         public ICommand OnAppearingCommand { get; set; }
         public ICommand AddCommand { get; set; }
@@ -34,18 +33,11 @@ namespace Appesame.ViewModels
 
         public FlashcardViewModel()
         {
-            OnAppearingCommand = new Command(OnAppearing);
+            ExamName = Preferences.Get("CurrentExam", "Flashcards");
             GoBackCommand = new Command(async () => await GoBack());          
             AddCommand = new Command(async () => await AddItem());
             ItemTappedCommand = new Command<FlashcardModel>(async (x) => await OnItemSelectedAsync(x));
             DeleteCommand = new Command<object>(DeleteItem);
-        }
-        private void OnAppearing()
-        {
-            //the name of the exam is retrived from the Preferences
-            ExamName = Preferences.Get("CurrentExam", "Flashcards");
-            FlashcardModelList = DataService.GetAllItems("Flashcard", ExamName) as IEnumerable<FlashcardModel>;
-            OnPropertyChanged("FlashcardModelList");
         }
         private async Task GoBack()
         {

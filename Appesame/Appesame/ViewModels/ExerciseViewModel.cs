@@ -23,7 +23,7 @@ namespace Appesame.ViewModels
             }
         }
 
-        public IEnumerable<ExerciseModel> ExerciseModelList { get; set; }
+        public IEnumerable<ExerciseModel> ExerciseModelList => DataService.GetAllItems("Exercise", ExamName) as IEnumerable<ExerciseModel>;
         public ICommand GoBackCommand { get; set; }
         public ICommand OnAppearingCommand { get; set; }
         public ICommand AddCommand { get; set; }
@@ -32,17 +32,11 @@ namespace Appesame.ViewModels
 
         public ExerciseViewModel()
         {
-            OnAppearingCommand = new Command(OnAppearing);
+            ExamName = Preferences.Get("CurrentExam", "Exercises");
             GoBackCommand = new Command(async () => await GoBack());
             AddCommand = new Command(async () => await AddItem());
             ItemTappedCommand = new Command<ExerciseModel>(async (x) => await OnItemSelectedAsync(x));
             DeleteCommand = new Command<object>(DeleteItem);
-        }
-        private void OnAppearing()
-        {
-            ExamName = Preferences.Get("CurrentExam", "Exercises");
-            ExerciseModelList = DataService.GetAllItems("Exercise", ExamName) as IEnumerable<ExerciseModel>;
-            OnPropertyChanged("ExerciseModelList");
         }
         private async Task GoBack()
         {

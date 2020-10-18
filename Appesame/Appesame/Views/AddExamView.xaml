@@ -33,7 +33,8 @@
     <ContentPage.Content>
         <StackLayout>
             <Entry Placeholder="Enter Exam Name" 
-                   Text="{Binding ExamName, Mode=TwoWay}"/>
+                   Text="{Binding ExamName, Mode=TwoWay}"
+                    Margin="20,0,20,0"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

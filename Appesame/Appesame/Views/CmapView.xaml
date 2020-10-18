@@ -31,12 +31,6 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <ContentPage.Behaviors>
-        <behaviors:EventHandlerBehavior EventName="Appearing">
-            <behaviors:InvokeCommandAction Command="{Binding OnAppearingCommand}"/>
-        </behaviors:EventHandlerBehavior>
-    </ContentPage.Behaviors>
-
     <ContentPage.Content>
         <StackLayout>
             <Grid Margin="20,0,0,0">
@@ -48,13 +42,6 @@
                     <ColumnDefinition Width="0,3*" />
                     <ColumnDefinition Width="0,3*" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="1"   
-                       Grid.Row="0"
-                       Text="memorized ?"
-                       FontAttributes="None" 
-                       FontSize="15"
-                       HorizontalOptions="EndAndExpand"
-                       VerticalOptions="CenterAndExpand"/>
             </Grid>
             <ListView ItemsSource="{Binding CmapModelList}"
                       x:Name="CmaplistView">

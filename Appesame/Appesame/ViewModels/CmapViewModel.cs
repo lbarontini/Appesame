@@ -24,7 +24,7 @@ namespace Appesame.ViewModels
             }
         }
 
-        public IEnumerable<CmapModel> CmapModelList { get; set; }
+        public IEnumerable<CmapModel> CmapModelList => DataService.GetAllItems("Cmap", ExamName) as IEnumerable<CmapModel>;
         public ICommand GoBackCommand { get; set; }
         public ICommand OnAppearingCommand { get; set; }
         public ICommand AddCommand { get; set; }
@@ -33,17 +33,11 @@ namespace Appesame.ViewModels
 
         public CmapViewModel()
         {
-            OnAppearingCommand = new Command(OnAppearing);
+            ExamName = Preferences.Get("CurrentExam", "Cmaps");
             GoBackCommand = new Command(async () => await GoBack());
             AddCommand = new Command(async () => await AddItem());
             ItemTappedCommand = new Command<CmapModel>(async (x) => await OnItemSelectedAsync(x));
             DeleteCommand = new Command<object>(DeleteItem);
-        }
-        private void OnAppearing()
-        {
-            ExamName = Preferences.Get("CurrentExam", "Cmaps");
-            CmapModelList = DataService.GetAllItems("Cmap", ExamName) as IEnumerable<CmapModel>;
-            OnPropertyChanged("CmapModelList");
         }
         private async Task GoBack()
         {

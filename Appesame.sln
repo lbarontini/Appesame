@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appesame.Android", "Appesame\Appesame.Android\Appesame.Android.csproj", "{E4CE26D2-0C3F-4667-A6CC-21BCD4BD9D95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appesame", "Appesame\Appesame\Appesame.csproj", "{4638E77C-4806-4454-B27E-4A9001E9F7FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Appesame", "Appesame\Appesame\Appesame.csproj", "{4638E77C-4806-4454-B27E-4A9001E9F7FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,15 +13,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E4CE26D2-0C3F-4667-A6CC-21BCD4BD9D95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4CE26D2-0C3F-4667-A6CC-21BCD4BD9D95}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4CE26D2-0C3F-4667-A6CC-21BCD4BD9D95}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E4CE26D2-0C3F-4667-A6CC-21BCD4BD9D95}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{E4CE26D2-0C3F-4667-A6CC-21BCD4BD9D95}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{E4CE26D2-0C3F-4667-A6CC-21BCD4BD9D95}.Debug|Any CPU.Deploy.0 = Release|Any CPU
 		{E4CE26D2-0C3F-4667-A6CC-21BCD4BD9D95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4CE26D2-0C3F-4667-A6CC-21BCD4BD9D95}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E4CE26D2-0C3F-4667-A6CC-21BCD4BD9D95}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{4638E77C-4806-4454-B27E-4A9001E9F7FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4638E77C-4806-4454-B27E-4A9001E9F7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4638E77C-4806-4454-B27E-4A9001E9F7FA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4638E77C-4806-4454-B27E-4A9001E9F7FA}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{4638E77C-4806-4454-B27E-4A9001E9F7FA}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{4638E77C-4806-4454-B27E-4A9001E9F7FA}.Debug|Any CPU.Deploy.0 = Release|Any CPU
 		{4638E77C-4806-4454-B27E-4A9001E9F7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4638E77C-4806-4454-B27E-4A9001E9F7FA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4638E77C-4806-4454-B27E-4A9001E9F7FA}.Release|Any CPU.Deploy.0 = Release|Any CPU

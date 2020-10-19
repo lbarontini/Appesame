@@ -64,9 +64,11 @@ namespace Appesame.ViewModels
                 await App.Current.MainPage.DisplayAlert("Error", "the file must be misplaced or deleted", "OK");
             }
         }
-        private void DeleteItem(object obj)
+        private async void DeleteItem(object obj)
         {
-            DataService.DeleteItem(obj, "Recording");
+            bool result = await App.Current.MainPage.DisplayAlert("Attention", "Do you want to delete this recording?", "YES", "NO");
+            if (result)
+                DataService.DeleteItem(obj, "Recording");
         }
     }
 }

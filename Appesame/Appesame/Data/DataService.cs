@@ -11,8 +11,8 @@ namespace Appesame.Data
 {
     public static class DataService
     {
-        //Database instantiated as singleton
-        public static Realm DatabaseInstance = Realm.GetInstance(new RealmConfiguration() { ShouldDeleteIfMigrationNeeded = true });
+        //Database instantiated as singleton use new RealmConfiguration() { ShouldDeleteIfMigrationNeeded = true } for developing
+        public static Realm DatabaseInstance = Realm.GetInstance();
 
         //getter for the exams
         public static IEnumerable<ExamModel> GetAllExams() => DatabaseInstance.All<ExamModel>();

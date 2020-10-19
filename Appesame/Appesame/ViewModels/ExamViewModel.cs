@@ -33,8 +33,10 @@ namespace Appesame.ViewModels
         {
             await Shell.Current.GoToAsync("//AddExam", true);
         }
-        private void DeleteExam(object obj)
+        private async void DeleteExam(object obj)
         {
+            bool result = await App.Current.MainPage.DisplayAlert("Attention", "Do you want to delete this exam?", "YES","NO");
+            if (result)
             DataService.DeleteExam(obj);
         }
     }

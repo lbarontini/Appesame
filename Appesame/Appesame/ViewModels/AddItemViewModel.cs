@@ -110,11 +110,12 @@ namespace Appesame.ViewModels
                     };
                     break;
             }
-                var result = await FilePicker.PickAsync(opt);
+            var result = await FilePicker.PickAsync(opt);
             if (result != null)
             {
                 FileName = result.FileName;
                 FileUri = result.FullPath;
             }
+        }
     }
 }

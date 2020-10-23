@@ -27,7 +27,7 @@ namespace Appesame.ViewModels
         {
             //putting the current exam name in the Preferences
             Preferences.Set("CurrentExam", examModel.name);
-            await Shell.Current.GoToAsync("//Tabbar", true);   
+            await Shell.Current.GoToAsync("//Tabbar", true);
         }
         private async Task AddExam() 
         {

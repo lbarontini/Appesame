@@ -116,10 +116,5 @@ namespace Appesame.ViewModels
                 FileName = result.FileName;
                 FileUri = result.FullPath;
             }
-            else
-            {
-                await App.Current.MainPage.DisplayAlert("Error", "something went wrong", "OK");
-            }
-        }
     }
 }
